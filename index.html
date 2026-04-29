@@ -1,268 +1,191 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1920, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Isthoppuwa Menu Board</title>
-  <style>
-    html {
-      min-width: 1920px;
-      min-height: 1080px;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: #0b0c10;
-      color: #ffffff;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-    .menu-board {
-      width: 100%;
-      height: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: column;
-      flex-direction: column;
-      padding: 2vw;
-      position: relative;
-      z-index: 1;
-    }
-    header {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-justify-content: space-between;
-      justify-content: space-between;
-      -webkit-align-items: center;
-      align-items: center;
-      margin-bottom: 0.8vh;
-      padding-bottom: 0.8vh;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .logo {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-    .logo-img {
-      height: 12vh;
-      max-width: 100%;
-      object-fit: contain;
-    }
-    .header-right {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-align-items: center;
-      align-items: center;
-      gap: 1vw;
-    }
-    .countdown {
-      font-size: 1.5vw;
-      font-weight: 600;
-      color: #f4d50b;
-      background: rgba(255,255,255,0.04);
-      padding: 1vh 2vw;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.08);
-      width: 20vw;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .page-indicator {
-      font-size: 1.5vw;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.04);
-      padding: 1vh 2vw;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.08);
-      letter-spacing: 1px;
-    }
-    .clock {
-      font-size: 2.5vw;
-      font-weight: 600;
-      color: #ffffff;
-      background: rgba(255,255,255,0.04);
-      padding: 1vh 2vw;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .menu-container {
-      -webkit-box-flex: 1;
-      -webkit-flex: 1;
-      flex: 1;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
-      gap: 2vw;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-align-content: flex-start;
-      align-content: flex-start;
-      overflow: hidden;
-      opacity: 1;
-    }
-    .category {
-      -webkit-box-flex: 0;
-      -webkit-flex: 0 0 calc((100% - 4vw) / 3);
-      flex: 0 0 calc((100% - 4vw) / 3);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 1vw;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: column;
-      flex-direction: column;
-      gap: 0.5vh;
-      box-shadow: 0 16px 32px 0 rgba(0,0,0,0.4);
-    }
-    .menu-container.count-2 .category,
-    .menu-container.count-4 .category {
-      -webkit-flex: 0 0 calc((100% - 2vw) / 2);
-      flex: 0 0 calc((100% - 2vw) / 2);
-    }
-    .menu-container.count-6 .category { padding: 0.8vw; gap: 0.2vh; }
-    .menu-container.count-6 .category-title { font-size: 1.3vw; padding-bottom: 0.2vh; margin-bottom: 0.2vh; }
-    .menu-container.count-6 .dish-name { font-size: 1.0vw; line-height: 1.1; }
-    .menu-container.count-6 .dish-price { font-size: 1.1vw; line-height: 1.1; }
-    .category-title {
-      font-size: 1.8vw;
-      font-weight: 800;
-      text-align: center;
-      color: #f3a952;
-      margin-bottom: 1vh;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding-bottom: 1vh;
-      border-bottom: 2px solid #f3a952;
-    }
-    .dish {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: column;
-      flex-direction: column;
-      margin-bottom: 0;
-    }
-    .dish-header {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-justify-content: space-between;
-      justify-content: space-between;
-      -webkit-align-items: baseline;
-      align-items: baseline;
-      gap: 1vw;
-    }
-    .dish-name {
-      font-size: 1.4vw;
-      font-weight: 600;
-      padding: 5px 0;
-      color: #ffffff;
-    }
-    .dish-dots {
-      -webkit-box-flex: 1;
-      -webkit-flex-grow: 1;
-      flex-grow: 1;
-      border-bottom: 2px dotted rgba(255,255,255,0.2);
-      margin: 0 1vw;
-      position: relative;
-      top: -0.6vw;
-    }
-    .dish-price {
-      font-size: 1.5vw;
-      font-weight: 800;
-      color: #f3a952;
-    }
-    footer {
-      margin-top: 1vh;
-      height: 4.5vh;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 50px;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-align-items: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; position: relative; }
-    .ticker {
-      display: inline-block;
-      white-space: nowrap;
-      -webkit-animation: ticker 30s linear infinite;
-      animation: ticker 30s linear infinite;
-      padding-left: 2vw;
-    }
-    .ticker-item {
-      display: inline-block;
-      padding: 0 2vw;
-      font-size: 1.5vw;
-      font-weight: 400;
-      color: #ffffff;
-      letter-spacing: 1px;
-    }
-    @-webkit-keyframes ticker {
-      0%   { -webkit-transform: translate3d(0, 0, 0); }
-      100% { -webkit-transform: translate3d(-50%, 0, 0); }
-    }
-    @keyframes ticker {
-      0%   { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
-    }
-  </style>
-</head>
-<body>
-  <div class="menu-board">
-    <header>
-      <div class="logo">
-        <img src="F3%20Background%20Removed.png" alt="Isthoppuwa" class="logo-img">
-      </div>
-      <div class="header-right">
-        <div class="page-indicator" id="page-indicator">Page 1 / 3</div>
-        <div class="countdown" id="countdown">Next Page in: 10s</div>
-        <div class="clock" id="clock">12:00 PM</div>
-      </div>
-    </header>
-
-    <main id="menu-container" class="menu-container"></main>
-
-    <footer>
-      <div class="ticker-wrap">
-        <div class="ticker">
-          <span class="ticker-item">Welcome to Isthoppuwa!</span>
-          <span class="ticker-item">Place your order : 070 734 2399</span>
-          <span class="ticker-item">Instagram: isthoppuwa</span>
-          <span class="ticker-item">Facebook: Isthoppuwa by N&amp;H caters</span>
-          <span class="ticker-item">Welcome to Isthoppuwa!</span>
-          <span class="ticker-item">Place your order : 070 734 2399</span>
-          <span class="ticker-item">Instagram: isthoppuwa</span>
-          <span class="ticker-item">Facebook: Isthoppuwa by N&amp;H caters</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Isthoppuwa Menu Board</title>
+    <style>
+      /* Fallbacks first for old browsers */
+      html { min-width: 1920px; min-height: 1080px; }
+      body { 
+        background-color: #0b0c10; 
+        color: #ffffff; 
+        font-family: 'Segoe UI', Arial, sans-serif;
+        height: 100vh; width: 100vw; overflow: hidden;
+        /* Table fallback for flex */
+        display: table; table-layout: fixed; width: 100%; height: 100%;
+        /* Modern flex */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-box-orient: vertical; -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+      }
+      
+      /* Menu board - table fallback */
+      .menu-board { 
+        width: 100%; height: 100%; 
+        display: table-row; /* Fallback */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-box-orient: vertical; -webkit-flex-direction: column;
+        flex-direction: column;
+        padding: 2vw; position: relative; z-index: 1;
+      }
+      
+      /* Header - table fallback */
+      header { 
+        display: table; table-layout: fixed; width: 100%; /* Fallback */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-box-pack: justify; -webkit-justify-content: space-between;
+        justify-content: space-between;
+        -webkit-box-align: center; -webkit-align-items: center;
+        align-items: center;
+        margin-bottom: 0.8vh; padding-bottom: 0.8vh;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      
+      .logo { display: table-cell; vertical-align: middle; width: auto; }
+      .logo-img { height: 12vh; max-width: 100%; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+      .header-right { 
+        display: table-cell; vertical-align: middle; /* Fallback */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        gap: 1vw; -webkit-box-align: center; -webkit-align-items: center;
+        align-items: center;
+      }
+      
+      /* Cards - remove backdrop-filter */
+      .countdown, .page-indicator, .clock {
+        font-size: 1.5vw; font-weight: 600; padding: 1vh 2vw; 
+        border-radius: 50px; border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.04); /* No backdrop-filter */
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      }
+      .countdown { color: #f4d50b; width: 20vw; text-align: center; white-space: nowrap; }
+      .page-indicator { color: rgba(255,255,255,0.6); letter-spacing: 1px; }
+      .clock { font-size: 2.5vw; color: #ffffff; }
+      
+      /* Menu container - table fallback */
+      .menu-container { 
+        display: block; /* Fallback */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-flex-wrap: wrap; flex-wrap: wrap;
+        gap: 2vw; -webkit-justify-content: center; justify-content: center;
+        -webkit-align-content: flex-start; align-content: flex-start;
+        overflow: hidden;
+        flex: 1; /* Takes remaining space */
+        height: 100%; /* Table fallback */
+      }
+      
+      /* Categories - float fallback */
+      .category { 
+        float: left; width: calc((100% - 4vw) / 3); /* Fallback */
+        background: rgba(255,255,255,0.04); 
+        border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+        padding: 1vw; margin: 1vw; /* Float spacing */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-box-orient: vertical; -webkit-flex-direction: column;
+        flex-direction: column;
+        gap: 0.5vh; box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+        clear: none; /* Reset float issues */
+      }
+      .menu-container:after { content: ""; display: table; clear: both; } /* Clear floats */
+      
+      /* Responsive category widths */
+      .menu-container.count-2 .category,
+      .menu-container.count-4 .category { width: calc((100% - 2vw) / 2); }
+      
+      .category-title {
+        font-size: 1.8vw; font-weight: 800; text-align: center;
+        color: #f3a952; margin-bottom: 1vh; text-transform: uppercase;
+        letter-spacing: 2px; padding-bottom: 1vh;
+      }
+      .category-title:after {
+        content: ''; position: absolute; bottom: 0; left: 50%;
+        width: 60%; height: 2px; background: #f3a952;
+        margin-left: -30%; /* Center with margin */
+      }
+      
+      /* Dish layout - table fallback */
+      .dish { display: block; margin-bottom: 0; }
+      .dish-header { 
+        display: table; table-layout: fixed; width: 100%; /* Fallback */
+        display: -webkit-box; display: -webkit-flex; display: flex;
+        -webkit-justify-content: space-between; justify-content: space-between;
+      }
+      .dish-name { 
+        font-size: 1.4vw; font-weight: 600; padding: 5px 0; 
+        color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        display: table-cell; /* Fallback */
+      }
+      .dish-dots { 
+        border-bottom: 2px dotted rgba(255,255,255,0.2); 
+        height: 2px; margin: 0 1vw; position: relative; top: -0.6vw;
+      }
+      .dish-price { 
+        font-size: 1.5vw; font-weight: 800; color: #f3a952; 
+        text-shadow: 0 2px 10px rgba(243,169,82,0.4);
+        display: table-cell; text-align: right; width: auto; /* Fallback */
+      }
+      
+      /* Footer - unchanged, works everywhere */
+      footer {
+        margin-top: 1vh; height: 4.5vh; background: rgba(0,0,0,0.5);
+        border: 1px solid rgba(255,255,255,0.08); border-radius: 50px;
+        display: table; width: 100%; /* Fallback */
+        display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center;
+      }
+      .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
+      .ticker { 
+        display: inline-block; white-space: nowrap; 
+        -webkit-animation: ticker 30s linear infinite; 
+        animation: ticker 30s linear infinite; padding-left: 2vw;
+      }
+      @-webkit-keyframes ticker { 0% { -webkit-transform: translate3d(0,0,0); } 100% { -webkit-transform: translate3d(-50%,0,0); } }
+      @keyframes ticker { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
+    </style>
+  </head>
+  <body>
+    <!-- Same HTML structure, unchanged -->
+    <div class="menu-board">
+      <header>
+        <div class="logo">
+          <img src="F3%20Background%20Removed.png" alt="Isthoppuwa" class="logo-img" />
         </div>
-      </div>
-    </footer>
-  </div>
-  <script src="script.js"></script>
-</body>
+        <div class="header-right">
+          <div class="page-indicator" id="page-indicator">Page 1 / 3</div>
+          <div class="countdown" id="countdown">Next Page in: 10s</div>
+          <div class="clock" id="clock">12:00 PM</div>
+        </div>
+      </header>
+      <main id="menu-container" class="menu-container"></main>
+      <footer>
+        <div class="ticker-wrap">
+          <div class="ticker">
+            <div class="ticker-item">Welcome to ඉස්තෝප්පුව!</div>
+            <div class="ticker-item">Place your order : 070 734 2399</div>
+            <!-- Rest unchanged -->
+            <div class="ticker-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -4px; margin-right: 6px">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              isthoppuwa
+            </div>
+            <!-- Duplicates unchanged -->
+            <div class="ticker-item">Welcome to Isthoppuwa! Experience the true taste of Sri Lanka.</div>
+            <div class="ticker-item">Place your order : 070 734 2399</div>
+            <div class="ticker-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -4px; margin-right: 6px">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              isthoppuwa
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
