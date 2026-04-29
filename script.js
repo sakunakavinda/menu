@@ -187,6 +187,14 @@ function renderMenu() {
         container.style.opacity = 1;
         isFirstRender = false;
         
+        // Update page indicator
+        const totalPages = Math.ceil(categories.length / CATEGORIES_PER_PAGE);
+        const displayPage = currentPage === 0 ? totalPages : currentPage; // currentPage already incremented below
+        const pageIndicator = document.getElementById('page-indicator');
+        if (pageIndicator) {
+            pageIndicator.textContent = `Page ${currentPage + 1} / ${totalPages}`;
+        }
+        
         // Increment page
         currentPage++;
         if (currentPage * CATEGORIES_PER_PAGE >= categories.length) {
