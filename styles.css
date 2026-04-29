@@ -11,6 +11,15 @@
     --font-main: 'Outfit', sans-serif;
 }
 
+html {
+    /* Force a stable 1920x1080 base for old HDTVs.
+       Prevents the browser from auto-zooming or using a mobile viewport. */
+    min-width: 1920px;
+    min-height: 1080px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
