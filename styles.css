@@ -78,9 +78,10 @@ header {
     border: 1px solid var(--card-border);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    min-width: 18vw;
+    width: 20vw;
     text-align: center;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .page-indicator {
